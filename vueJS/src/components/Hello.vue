@@ -26,7 +26,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios)
-var socket = io("http://localhost:8000");
+var socket = io("https://node3-dbhvmzvgfk.now.sh");//http://localhost:8000
 
 
 export default {
@@ -53,12 +53,12 @@ export default {
   methods: {
     
     showClips(){
-      Vue.axios.get('http://localhost:8000/getClips')
+      Vue.axios.get('https://node3-dbhvmzvgfk.now.sh/getClips')//http://localhost:8000/getClips
         .then(response=>{
 
           $('.list').empty();
           for(let clip of response.data){
-            $('.list').append('<li><a href="'+clip.url+'">'+clip.title+'</a></li>');
+            $('.list').append('<li><a target="_blank" href="'+clip.url+'">'+clip.title+'</a></li>');
           }
         })
         .catch(function(e){ this.error = err.toString();console.log(e) })

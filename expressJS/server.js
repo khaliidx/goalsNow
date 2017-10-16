@@ -6,8 +6,6 @@ const moment = require('moment')
 const CronJob = require('cron').CronJob;
 const _ = require('underscore')
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 mongoose.Promise = global.Promise;/////////// plug bluebird for better performance 
 
 

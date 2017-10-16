@@ -1,15 +1,7 @@
 <template>
   <div id="app">
-    <nav>
-      <ul>
-        <li><router-link to="">HOME</router-link></li>
-        <li><router-link to="">About</router-link></li>
-        <li><a href="#">contact</a></li>
-        <li><a href="#">login</a></li>
-      </ul>
-    </nav>
 
-    <a href="\"><h1>GoalsNow</h1></a>
+    <a href="\" id="mainHeader"><h1>Goals<span style="color:#005580">Now</span></h1></a>
 
     <div id="description">
        <p> A Web App that streams all <b>goals</b> and <b>Clips</b> from the subreddit <a href="https://www.reddit.com/r/soccer"><em>/r/soccer</em></a></p>
@@ -36,6 +28,11 @@ export default {
     background-color: black;
     color: #fff;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  }
+
+  #mainHeader h1{
+    padding-top: 50px;
+    font-size: 4em;
   }
 
     h1{
