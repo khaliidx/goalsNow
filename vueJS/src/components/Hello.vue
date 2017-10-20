@@ -14,8 +14,8 @@
       <ul class="list"></ul>
 
   </div>
-
 </div>
+
 </template>
 
 <script>
@@ -70,7 +70,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>  
-    .left{
+    .left{  
       width: 70%;
       float: left;
     }
@@ -81,6 +81,7 @@ export default {
     }
 
     .list {
+      height: 100%;
       list-style: none;
       width:90%;
       overflow: hidden;
@@ -90,5 +91,6 @@ export default {
       padding: 10px 15px;
     }
     .list >>> li:nth-child(odd) { background: #00334d; }/*#555*/
+
     
 </style>

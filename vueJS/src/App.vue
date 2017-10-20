@@ -10,6 +10,8 @@
 
     <router-view></router-view>
 
+   <footer>This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong></footer>
+
   </div>
 </template>
 
@@ -24,7 +26,12 @@ export default {
 
 
 <style>
+
   body{
+    height:auto;
+    position:relative;
+    margin: 0;
+    padding-bottom: 6rem;
     background-color: black;
     color: #fff;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -69,10 +76,6 @@ export default {
     color: #fff;
   }
 
-  nav li{
-    display: inline;
-    padding-right: 50px;
-  }
 
   #description {
     height: 150px;
@@ -81,6 +84,23 @@ export default {
 
   #description em,#description b{
     color:#005580;
+  }
+  
+  footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+}
+
+  .Site {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
   }
 
 </style>
