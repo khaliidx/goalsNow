@@ -54,6 +54,7 @@ export default {
         } 
          return Math.floor(hours)+" hours ago";
        } 
+       if(minutes==-1) minutes=0;// sometimes moment.duration returns -1 NEEDS BETTER FIX
        return Math.floor(minutes)+" minutes ago";
     },
 
