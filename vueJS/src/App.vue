@@ -10,7 +10,7 @@
 
     <router-view></router-view>
 
-   <footer>This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong></footer>
+   <footer>Made by </strong><a href="https://github.com/khaliidx">Khalid Mouhcine</a> | 2017 GoalsNow.</footer>
 
   </div>
 </template>

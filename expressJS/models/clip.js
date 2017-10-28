@@ -8,7 +8,7 @@ let clipSchema = mongoose.Schema({
 	score: { type: Number },
 	commentLink: { type: String },
 	nbrComments: { type: Number },
-	createdAt: { type: String , default: moment(Date.now()).format("DD-MM-YYYY hh:mm:ss") }
+	createdAt: { type: String },
 });
 
 //exporting model

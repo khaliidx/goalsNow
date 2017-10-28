@@ -13,8 +13,8 @@ mongoose.Promise = global.Promise;/////////// plug bluebird for better performan
 // =============================================================================
 
 let connectionString = 'mongodb://user1:pass@ds141284.mlab.com:41284/goalsnow';// RANDOM DATABASE FOR TESTING ONLY
-//let connectionString = 'mongodb://localhost:27017';
-const port = 8000
+//let connectionString = 'mongodb://localhost:27017';   // Local db
+const port = process.env.PORT || 8000
 mongoose.connect(connectionString, {useMongoClient: true,})
 
 let server = app.listen(port, () => {
@@ -37,14 +37,14 @@ io.on('connection', socket => {
 
 
 function update(){
-    let clips;
+    let clipsFromDB;
 
     console.log("\nChecking for updates...")
 
     Clip.find().sort({ "createdAt" : -1, "_id" : 1 }).limit(20)
         .then( (results) => {
 
-            clips = results
+            clipsFromDB = results
             const options = {
                 method: 'GET',
                 uri: `https://reddit.com/r/soccer/new/.json?limit=20`
@@ -53,33 +53,37 @@ function update(){
             return request(options)
         })
         .then(response => {
-          let parsedRes = JSON.parse(response)
-          let allClips, finalClips = [], urls = ["youtube","youtu.be",".mp4","streamable","imgtc","gfycat"]
+          let parsedRes = JSON.parse(response) //posts
+          let filterdClips, newClips = [], urls = ["youtube","youtu.be",".mp4","streamable","imgtc","gfycat"]
 
-          // First filter : filter vids
-          allClips = _.filter(parsedRes.data.children, (clip) => {
+          // First filter : filter vids from posts
+          filterdClips = _.filter(parsedRes.data.children, (clip) => {
                 return !urls.every( (url)=>{
                     return !clip.data.url.includes(url)
                 })
           })
 
-          // Second filter :  filter the new ones in the loop below
-          for(let clip of allClips){
-            if(!clips.some( (c)=>{ return (c.title == clip.data.title) }) ) {
-                finalClips.unshift({
+          // Second filter :  filter the new clips
+          for(let clip of filterdClips){
+            if(!clipsFromDB.some( (c)=>{ return (c.title == clip.data.title) }) ) {
+                newClips.unshift({
                     title: clip.data.title,
                     url: clip.data.url,
                     score: clip.data.score,
-                    nbrConmments: clip.data.num_comments,
-                    createdAt: moment().format("YYYY-MM-DD HH:mm:ss")
+                    nbrComments: clip.data.num_comments,
+                    commentLink: "https://www.reddit.com"+clip.data.permalink,
+                    createdAt: moment().add(1,'hours').format("YYYY-MM-DD HH:mm:ss")
+                    /****************************************
+                        ADDED ONE HOUR HERE FOR HEROKU
+                    ****************************************/
                 })
             }
           }
-          console.log(new Date()+"\n"+finalClips.length+" new clips : "+finalClips)
+          console.log(new Date()+"\n"+newClips.length+" new clips : "+newClips)
 
-          if(finalClips.length){
-            io.emit('new clips', finalClips)       
-            return Clip.create(finalClips,()=>{ 
+          if(newClips.length){
+            io.emit('new clips', newClips)       
+            return Clip.create(newClips,()=>{ 
                 console.log("Database updated!");
             })
           }
