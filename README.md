@@ -1,9 +1,9 @@
 # goalsNow
 A web app that streams goals and clips from the subreddit _"r/soccer"_ built using **expressJS/Socket.IO**, **MongoDB** and **vueJS**.
 
-## Live demo (hosted on zeit's now)
+## Live demo
 
-https://goalsnow-kzpprzijzg.now.sh/#/ (not updated completely)
+Coming soon.
 
 ### The backend
 I used **NodeJS/ExpressJS** and **Socket.IO** for realtime updates from the database(**MongoDB**), and one HTTP endpoint for fetching the last 20 clips from the databases.
