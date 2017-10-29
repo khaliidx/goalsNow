@@ -72,7 +72,7 @@ function update(){
                     score: clip.data.score,
                     nbrComments: clip.data.num_comments,
                     commentLink: "https://www.reddit.com"+clip.data.permalink,
-                    createdAt: moment().add(1,'hours').format("YYYY-MM-DD HH:mm:ss")
+                    createdAt: moment().format("YYYY-MM-DD HH:mm:ss")
                     /****************************************
                         ADDED ONE HOUR HERE FOR HEROKU
                     ****************************************/
