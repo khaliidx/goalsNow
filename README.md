@@ -3,7 +3,7 @@ A web app that streams goals and clips from the subreddit _"r/soccer"_ built usi
 
 ## Live demo
 
-Coming soon.
+Deployed to heroku : https://goalsnow.herokuapp.com
 
 ### The backend
 I used **NodeJS/ExpressJS** and **Socket.IO** for realtime updates from the database(**MongoDB**), and one HTTP endpoint for fetching the last 20 clips from the databases.
