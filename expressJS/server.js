@@ -6,21 +6,18 @@ const moment = require('moment')
 const CronJob = require('cron').CronJob;
 const _ = require('underscore')
 
-mongoose.Promise = global.Promise;/////////// plug bluebird for better performance 
-
+//plug bluebird for better performance 
+mongoose.Promise = global.Promise;
 
 // CONNECT TO THE DATABASE AND START THE SERVER
-// =============================================================================
 
-let connectionString = 'mongodb://user1:pass@ds141284.mlab.com:41284/goalsnow';// RANDOM DATABASE FOR TESTING ONLY
-//let connectionString = 'mongodb://localhost:27017';   // Local db
+let connectionString = 'mongodb://admin1:admin1@ds121673.mlab.com:21673/goalsnow-db';//old db that i can't access anymore...
 const port = process.env.PORT || 8000
 mongoose.connect(connectionString, {useMongoClient: true,})
 
 let server = app.listen(port, () => {
     console.log('Magic happening on port '+port+'...')
 })
-
 
 // webSockets Socket.IO
 var io = require('socket.io')(server);
@@ -41,13 +38,13 @@ function update(){
 
     console.log("\nChecking for updates...")
 
-    Clip.find().sort({ "createdAt" : -1, "_id" : 1 }).limit(20)
+    Clip.find().sort({ "createdAt" : -1, "_id" : 1 }).limit(25)
         .then( (results) => {
 
             clipsFromDB = results
             const options = {
                 method: 'GET',
-                uri: `https://reddit.com/r/soccer/new/.json?limit=20`
+                uri: `https://reddit.com/r/soccer/new/.json?limit=25`
             };
 
             return request(options)
@@ -73,9 +70,7 @@ function update(){
                     nbrComments: clip.data.num_comments,
                     commentLink: "https://www.reddit.com"+clip.data.permalink,
                     createdAt: moment().format("YYYY-MM-DD HH:mm:ss")
-                    /****************************************
-                        ADDED ONE HOUR HERE FOR HEROKU
-                    ****************************************/
+                    //ADDED ONE HOUR HERE FOR HEROKU
                 })
             }
           }
