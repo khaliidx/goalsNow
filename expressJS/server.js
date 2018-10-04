@@ -54,7 +54,7 @@ function update(){
         })
         .then(response => {
           let parsedRes = JSON.parse(response) //posts
-          let filterdClips, newClips = [], urls = ["youtube","youtu.be",".mp4","streamable","imgtc","gfycat"]
+          let filterdClips, newClips = [], urls = ["youtube","youtu.be",".mp4","streamable","imgtc","gfycat","streamja","clippituser",]
 
           // First filter : filter vids from posts
           filterdClips = _.filter(parsedRes.data.children, (clip) => {
